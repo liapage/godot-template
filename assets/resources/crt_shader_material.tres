@@ -1,0 +1,13 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://djjxvxxignbq1"]
+
+[ext_resource type="Shader" uid="uid://2ctv1woadk8a" path="res://assets/resources/CRT.gdshader" id="1_2gt43"]
+
+[resource]
+shader = ExtResource("1_2gt43")
+shader_parameter/resolution = Vector2(1280, 720)
+shader_parameter/scan_line_amount = 0.226000010735
+shader_parameter/warp_amount = 0.0030000001425
+shader_parameter/vignette_amount = 0.6
+shader_parameter/vignette_intensity = 0.4
+shader_parameter/grille_amount = 0.2410000114475
+shader_parameter/brightness_boost = 1.2

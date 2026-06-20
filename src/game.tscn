@@ -1,0 +1,75 @@
+[gd_scene format=3 uid="uid://ma1vebq6fpjn"]
+
+[ext_resource type="Script" uid="uid://dfh8wpighme3x" path="res://src/Game.cs" id="1_17mmo"]
+[ext_resource type="PackedScene" uid="uid://cbg3kewfdrukk" path="res://src/World/world.tscn" id="2_wqvko"]
+[ext_resource type="Script" uid="uid://cbpy46sew8dde" path="res://src/Utils/SceneManager.cs" id="3_km1yn"]
+[ext_resource type="Script" uid="uid://bxq804agjnmna" path="res://src/Utils/AudioManager.cs" id="3_pk08u"]
+[ext_resource type="Material" uid="uid://djjxvxxignbq1" path="res://assets/resources/crt_shader_material.tres" id="4_7omc5"]
+[ext_resource type="Shader" uid="uid://blfwktda2pq7g" path="res://assets/resources/vignette.gdshader" id="8_cdx1q"]
+[ext_resource type="Shader" uid="uid://b1jkoy1t6gobe" path="res://assets/resources/grain.gdshader" id="9_4bcji"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4bcji"]
+shader = ExtResource("8_cdx1q")
+shader_parameter/inner_radius = 0.1
+shader_parameter/outer_radius = 1.0
+shader_parameter/vignette_strength = 0.7
+shader_parameter/dither_strength = 0.03
+shader_parameter/vignette_color = Color(0, 0, 0, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cdx1q"]
+shader = ExtResource("9_4bcji")
+shader_parameter/grain_amount = 0.050000002375
+shader_parameter/grain_size = 0.60000002524012
+
+[node name="Game" type="Control" unique_id=1484930348 node_paths=PackedStringArray("SceneManager", "AudioManager")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_17mmo")
+SceneManager = NodePath("SceneManager")
+AudioManager = NodePath("AudioManager")
+_initialScene = ExtResource("2_wqvko")
+
+[node name="SceneManager" type="Node" parent="." unique_id=1565304511 node_paths=PackedStringArray("_sceneContainer")]
+script = ExtResource("3_km1yn")
+_sceneContainer = NodePath("../SceneContainer")
+metadata/_custom_type_script = "uid://cbpy46sew8dde"
+
+[node name="SceneContainer" type="Node2D" parent="." unique_id=101169418]
+
+[node name="AudioManager" type="Node2D" parent="." unique_id=2128060993]
+script = ExtResource("3_pk08u")
+metadata/_custom_type_script = "uid://bxq804agjnmna"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1796269844]
+layer = 20
+
+[node name="CRT" type="ColorRect" parent="CanvasLayer" unique_id=1537162285]
+visible = false
+material = ExtResource("4_7omc5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0, 0, 0, 0)
+
+[node name="Vignette" type="ColorRect" parent="CanvasLayer" unique_id=1324086542]
+material = SubResource("ShaderMaterial_4bcji")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Grain" type="ColorRect" parent="CanvasLayer" unique_id=561215568]
+material = SubResource("ShaderMaterial_cdx1q")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
