@@ -3,10 +3,12 @@
 [ext_resource type="Script" uid="uid://dnielpqqkk8t" path="res://addons/godlib/Cursor/Cursor.cs" id="1_07lyd"]
 [ext_resource type="Texture2D" uid="uid://hq4w38d8ihex" path="res://assets/sprites/tilemap.png" id="1_ikxts"]
 [ext_resource type="Script" uid="uid://baur35qtk2xks" path="res://addons/godlib/DrawGrid/DrawGrid.cs" id="2_6041h"]
+[ext_resource type="Script" uid="uid://b2d40ouhf5rao" path="res://src/World/MiniGrid.cs" id="3_38fj6"]
 [ext_resource type="Script" uid="uid://dj40nlgyw3efg" path="res://addons/godlib/GridCursor/GridCursor.cs" id="3_6041h"]
+[ext_resource type="Shader" uid="uid://cjieepkuwue42" path="res://assets/resources/grid.gdshader" id="3_bdyxq"]
 [ext_resource type="Texture2D" uid="uid://bcn2s53khg8l3" path="res://assets/sprites/grid_cursor.png" id="4_3visu"]
-[ext_resource type="Script" uid="uid://d3aq2usjalaav" path="res://addons/godlib/Camera/CameraCursorController/CameraCursorController.cs" id="5_bimim"]
 [ext_resource type="Script" uid="uid://btlbhpegpveu8" path="res://addons/godlib/Camera/CameraTilemapLimiter/CameraTilemapLimiter.cs" id="7_6t4kj"]
+[ext_resource type="Script" uid="uid://dyx4s6sbfe56s" path="res://src/World/ElapsedTime.cs" id="8_bdyxq"]
 
 [sub_resource type="Environment" id="Environment_6041h"]
 background_mode = 3
@@ -21,6 +23,20 @@ texture = ExtResource("1_ikxts")
 [sub_resource type="TileSet" id="TileSet_8sv87"]
 sources/0 = SubResource("TileSetAtlasSource_3visu")
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pmow1"]
+shader = ExtResource("3_bdyxq")
+shader_parameter/line_width = 4.0
+shader_parameter/cell_size = 16.0
+shader_parameter/line_color = Color(0, 0, 0, 1)
+shader_parameter/grid_offset = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_38fj6"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rusor"]
+gradient = SubResource("Gradient_38fj6")
+
 [sub_resource type="Gradient" id="Gradient_6t4kj"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(0.601223, 0.601223, 0.60122293, 1)
@@ -30,6 +46,9 @@ gradient = SubResource("Gradient_6t4kj")
 width = 2
 height = 2
 
+[sub_resource type="LabelSettings" id="LabelSettings_6t4kj"]
+font_size = 70
+
 [node name="World" type="Node2D" unique_id=583695542]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1046529043]
@@ -38,7 +57,26 @@ environment = SubResource("Environment_6041h")
 [node name="DrawGrid" type="TileMapLayer" parent="." unique_id=3000926]
 tile_set = SubResource("TileSet_8sv87")
 script = ExtResource("2_6041h")
+Centered = true
+FixedSize = Vector2i(4, 4)
 metadata/_custom_type_script = "uid://baur35qtk2xks"
+
+[node name="MiniGrid" type="Node2D" parent="DrawGrid" unique_id=1125141021 node_paths=PackedStringArray("_drawGrid")]
+script = ExtResource("3_38fj6")
+_drawGrid = NodePath("..")
+
+[node name="GridCursor" type="Node2D" parent="DrawGrid" unique_id=288211667 node_paths=PackedStringArray("_drawGrid")]
+script = ExtResource("3_6041h")
+_drawGrid = NodePath("..")
+metadata/_custom_type_script = "uid://dj40nlgyw3efg"
+
+[node name="Sprite2D2" type="Sprite2D" parent="DrawGrid/GridCursor" unique_id=956230289]
+texture = ExtResource("4_3visu")
+
+[node name="GridOutline" type="Sprite2D" parent="DrawGrid" unique_id=1802714306]
+material = SubResource("ShaderMaterial_pmow1")
+texture = SubResource("GradientTexture2D_rusor")
+centered = false
 
 [node name="Cursor" type="Node2D" parent="." unique_id=942748008]
 script = ExtResource("1_07lyd")
@@ -47,24 +85,35 @@ metadata/_custom_type_script = "uid://dnielpqqkk8t"
 [node name="Sprite2D" type="Sprite2D" parent="Cursor" unique_id=1928596206]
 texture = SubResource("GradientTexture2D_8sv87")
 
-[node name="GridCursor" type="Node2D" parent="." unique_id=288211667 node_paths=PackedStringArray("_tileMapLayer")]
-script = ExtResource("3_6041h")
-_tileMapLayer = NodePath("../DrawGrid")
-metadata/_custom_type_script = "uid://dj40nlgyw3efg"
-
-[node name="Sprite2D" type="Sprite2D" parent="GridCursor" unique_id=956230289]
-texture = ExtResource("4_3visu")
-
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1246196891]
-zoom = Vector2(4, 4)
-
-[node name="CameraCursorController" type="Node2D" parent="Camera2D" unique_id=2011739108 node_paths=PackedStringArray("_camera")]
-script = ExtResource("5_bimim")
-_camera = NodePath("..")
-metadata/_custom_type_script = "uid://d3aq2usjalaav"
+zoom = Vector2(8, 8)
 
 [node name="CameraTilemapLimiter" type="Node2D" parent="Camera2D" unique_id=617406232 node_paths=PackedStringArray("_tileMapLayer", "_camera")]
 script = ExtResource("7_6t4kj")
 _tileMapLayer = NodePath("../../DrawGrid")
 _camera = NodePath("..")
 metadata/_custom_type_script = "uid://btlbhpegpveu8"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1872699074]
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer" unique_id=1512658494]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 120
+theme_override_constants/margin_top = 120
+theme_override_constants/margin_right = 120
+theme_override_constants/margin_bottom = 120
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/MarginContainer" unique_id=262243539]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="ElapsedTime" type="Label" parent="CanvasLayer/MarginContainer/VBoxContainer" unique_id=106966904]
+layout_mode = 2
+text = "00:00:00"
+label_settings = SubResource("LabelSettings_6t4kj")
+script = ExtResource("8_bdyxq")

@@ -17,5 +17,7 @@ public class State
     public State(Config config)
     {
     }
+
+    public DateTime RunStartTime =  DateTime.UtcNow;
 }
 
