@@ -38,11 +38,11 @@ script = ExtResource("3_km1yn")
 _sceneContainer = NodePath("../SceneContainer")
 metadata/_custom_type_script = "uid://cbpy46sew8dde"
 
-[node name="SceneContainer" type="Node2D" parent="." unique_id=101169418]
-
-[node name="AudioManager" type="Node2D" parent="." unique_id=2128060993]
+[node name="AudioManager" type="Node" parent="." unique_id=906727982]
 script = ExtResource("3_pk08u")
 metadata/_custom_type_script = "uid://bxq804agjnmna"
+
+[node name="SceneContainer" type="Node3D" parent="." unique_id=1922230534]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1796269844]
 layer = 20

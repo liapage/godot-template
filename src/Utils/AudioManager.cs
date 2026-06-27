@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Godot;
 
 [GlobalClass]
-public partial class AudioManager : Node2D
+public partial class AudioManager : Node
 {
     private readonly Dictionary<Config.AudioEffect, AudioStreamPlayer> _effectPlayers = [];
 

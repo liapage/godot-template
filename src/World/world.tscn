@@ -1,98 +1,63 @@
 [gd_scene format=3 uid="uid://cbg3kewfdrukk"]
 
-[ext_resource type="Script" uid="uid://dnielpqqkk8t" path="res://addons/godlib/Cursor/Cursor.cs" id="1_07lyd"]
 [ext_resource type="Texture2D" uid="uid://hq4w38d8ihex" path="res://assets/sprites/tilemap.png" id="1_ikxts"]
-[ext_resource type="Script" uid="uid://baur35qtk2xks" path="res://addons/godlib/DrawGrid/DrawGrid.cs" id="2_6041h"]
-[ext_resource type="Script" uid="uid://b2d40ouhf5rao" path="res://src/World/MiniGrid.cs" id="3_38fj6"]
-[ext_resource type="Script" uid="uid://dj40nlgyw3efg" path="res://addons/godlib/GridCursor/GridCursor.cs" id="3_6041h"]
-[ext_resource type="Shader" uid="uid://cjieepkuwue42" path="res://assets/resources/grid.gdshader" id="3_bdyxq"]
-[ext_resource type="Texture2D" uid="uid://bcn2s53khg8l3" path="res://assets/sprites/grid_cursor.png" id="4_3visu"]
-[ext_resource type="Script" uid="uid://btlbhpegpveu8" path="res://addons/godlib/Camera/CameraTilemapLimiter/CameraTilemapLimiter.cs" id="7_6t4kj"]
+[ext_resource type="Shader" uid="uid://c5oo42hq7as4o" path="res://assets/resources/grass.gdshader" id="2_ikxts"]
+[ext_resource type="Script" uid="uid://upjto5ej663h" path="res://src/World/Player.cs" id="3_6041h"]
 [ext_resource type="Script" uid="uid://dyx4s6sbfe56s" path="res://src/World/ElapsedTime.cs" id="8_bdyxq"]
 
-[sub_resource type="Environment" id="Environment_6041h"]
-background_mode = 3
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ikxts"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_6041h"]
+sky_material = SubResource("ProceduralSkyMaterial_ikxts")
+
+[sub_resource type="Environment" id="Environment_3visu"]
+background_mode = 2
+sky = SubResource("Sky_6041h")
+tonemap_mode = 2
 glow_enabled = true
-glow_intensity = 1.12
-glow_bloom = 0.3
-
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3visu"]
-texture = ExtResource("1_ikxts")
-0:0/0 = 0
-
-[sub_resource type="TileSet" id="TileSet_8sv87"]
-sources/0 = SubResource("TileSetAtlasSource_3visu")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pmow1"]
-shader = ExtResource("3_bdyxq")
-shader_parameter/line_width = 4.0
-shader_parameter/cell_size = 16.0
-shader_parameter/line_color = Color(0, 0, 0, 1)
-shader_parameter/grid_offset = Vector2(0, 0)
-
-[sub_resource type="Gradient" id="Gradient_38fj6"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_rusor"]
-gradient = SubResource("Gradient_38fj6")
-
-[sub_resource type="Gradient" id="Gradient_6t4kj"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.601223, 0.601223, 0.60122293, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_8sv87"]
-gradient = SubResource("Gradient_6t4kj")
-width = 2
-height = 2
 
 [sub_resource type="LabelSettings" id="LabelSettings_6t4kj"]
 font_size = 70
 
-[node name="World" type="Node2D" unique_id=583695542]
+[sub_resource type="BoxMesh" id="BoxMesh_8sv87"]
+size = Vector3(1000, 1, 1000)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1046529043]
-environment = SubResource("Environment_6041h")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6041h"]
+frequency = 0.1225
 
-[node name="DrawGrid" type="TileMapLayer" parent="." unique_id=3000926]
-tile_set = SubResource("TileSet_8sv87")
-script = ExtResource("2_6041h")
-Centered = true
-FixedSize = Vector2i(4, 4)
-metadata/_custom_type_script = "uid://baur35qtk2xks"
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ikxts"]
+noise = SubResource("FastNoiseLite_6041h")
 
-[node name="MiniGrid" type="Node2D" parent="DrawGrid" unique_id=1125141021 node_paths=PackedStringArray("_drawGrid")]
-script = ExtResource("3_38fj6")
-_drawGrid = NodePath("..")
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ikxts"]
+frequency = 0.0501
 
-[node name="GridCursor" type="Node2D" parent="DrawGrid" unique_id=288211667 node_paths=PackedStringArray("_drawGrid")]
-script = ExtResource("3_6041h")
-_drawGrid = NodePath("..")
-metadata/_custom_type_script = "uid://dj40nlgyw3efg"
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_6041h"]
+noise = SubResource("FastNoiseLite_ikxts")
 
-[node name="Sprite2D2" type="Sprite2D" parent="DrawGrid/GridCursor" unique_id=956230289]
-texture = ExtResource("4_3visu")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_m7l81"]
+render_priority = 0
+shader = ExtResource("2_ikxts")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_6041h")
+shader_parameter/layers = 20
+shader_parameter/depth_scale = 0.2
+shader_parameter/depth_strength = 0.4
+shader_parameter/detail_noise_texture = SubResource("NoiseTexture2D_ikxts")
+shader_parameter/shape_detail_mix_factor = 0.378000017955
+shader_parameter/detail_scale = Vector2(4, 4)
+shader_parameter/highlight_color = Color(0.576, 0.757, 0.424, 1)
+shader_parameter/base_color = Color(0.341, 0.569, 0.282, 1)
+shader_parameter/mix_amount = 0.0
 
-[node name="GridOutline" type="Sprite2D" parent="DrawGrid" unique_id=1802714306]
-material = SubResource("ShaderMaterial_pmow1")
-texture = SubResource("GradientTexture2D_rusor")
-centered = false
+[node name="World" type="Node3D" unique_id=1370971575]
 
-[node name="Cursor" type="Node2D" parent="." unique_id=942748008]
-script = ExtResource("1_07lyd")
-metadata/_custom_type_script = "uid://dnielpqqkk8t"
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1974016762]
+environment = SubResource("Environment_3visu")
 
-[node name="Sprite2D" type="Sprite2D" parent="Cursor" unique_id=1928596206]
-texture = SubResource("GradientTexture2D_8sv87")
-
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1246196891]
-zoom = Vector2(8, 8)
-
-[node name="CameraTilemapLimiter" type="Node2D" parent="Camera2D" unique_id=617406232 node_paths=PackedStringArray("_tileMapLayer", "_camera")]
-script = ExtResource("7_6t4kj")
-_tileMapLayer = NodePath("../../DrawGrid")
-_camera = NodePath("..")
-metadata/_custom_type_script = "uid://btlbhpegpveu8"
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1129610953]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1872699074]
 
@@ -117,3 +82,18 @@ layout_mode = 2
 text = "00:00:00"
 label_settings = SubResource("LabelSettings_6t4kj")
 script = ExtResource("8_bdyxq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=135745869]
+mesh = SubResource("BoxMesh_8sv87")
+surface_material_override/0 = SubResource("ShaderMaterial_m7l81")
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D" unique_id=1119588977]
+transform = Transform3D(1, 0, 0, 0, 0.88834757, 0.45917174, 0, -0.45917177, 0.8883475, 0, 205.16791, 399.59476)
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="." unique_id=1002816998]
+script = ExtResource("3_6041h")
+
+[node name="Sprite3D" type="Sprite3D" parent="CharacterBody3D" unique_id=339471987]
+transform = Transform3D(100, 0, 0, 0, 100, 0, 0, 0, 100, 0, 6.830616, 0)
+texture_filter = 2
+texture = ExtResource("1_ikxts")
