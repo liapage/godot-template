@@ -1,12 +1,70 @@
 [gd_scene format=3 uid="uid://cbg3kewfdrukk"]
 
+[ext_resource type="Script" uid="uid://dnielpqqkk8t" path="res://addons/godlib/Cursor/Cursor.cs" id="1_07lyd"]
+[ext_resource type="Texture2D" uid="uid://hq4w38d8ihex" path="res://assets/sprites/tilemap.png" id="1_ikxts"]
+[ext_resource type="Script" uid="uid://baur35qtk2xks" path="res://addons/godlib/DrawGrid/DrawGrid.cs" id="2_6041h"]
+[ext_resource type="Script" uid="uid://dj40nlgyw3efg" path="res://addons/godlib/GridCursor/GridCursor.cs" id="3_6041h"]
+[ext_resource type="Texture2D" uid="uid://bcn2s53khg8l3" path="res://assets/sprites/grid_cursor.png" id="4_3visu"]
+[ext_resource type="Script" uid="uid://d3aq2usjalaav" path="res://addons/godlib/Camera/CameraCursorController/CameraCursorController.cs" id="5_bimim"]
+[ext_resource type="Script" uid="uid://btlbhpegpveu8" path="res://addons/godlib/Camera/CameraTilemapLimiter/CameraTilemapLimiter.cs" id="7_6t4kj"]
+
 [sub_resource type="Environment" id="Environment_6041h"]
 background_mode = 3
 glow_enabled = true
 glow_intensity = 1.12
 glow_bloom = 0.3
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3visu"]
+texture = ExtResource("1_ikxts")
+0:0/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_8sv87"]
+sources/0 = SubResource("TileSetAtlasSource_3visu")
+
+[sub_resource type="Gradient" id="Gradient_6t4kj"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.601223, 0.601223, 0.60122293, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8sv87"]
+gradient = SubResource("Gradient_6t4kj")
+width = 2
+height = 2
+
 [node name="World" type="Node2D" unique_id=583695542]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1046529043]
 environment = SubResource("Environment_6041h")
+
+[node name="DrawGrid" type="TileMapLayer" parent="." unique_id=3000926]
+tile_set = SubResource("TileSet_8sv87")
+script = ExtResource("2_6041h")
+metadata/_custom_type_script = "uid://baur35qtk2xks"
+
+[node name="Cursor" type="Node2D" parent="." unique_id=942748008]
+script = ExtResource("1_07lyd")
+metadata/_custom_type_script = "uid://dnielpqqkk8t"
+
+[node name="Sprite2D" type="Sprite2D" parent="Cursor" unique_id=1928596206]
+texture = SubResource("GradientTexture2D_8sv87")
+
+[node name="GridCursor" type="Node2D" parent="." unique_id=288211667 node_paths=PackedStringArray("_tileMapLayer")]
+script = ExtResource("3_6041h")
+_tileMapLayer = NodePath("../DrawGrid")
+metadata/_custom_type_script = "uid://dj40nlgyw3efg"
+
+[node name="Sprite2D" type="Sprite2D" parent="GridCursor" unique_id=956230289]
+texture = ExtResource("4_3visu")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1246196891]
+zoom = Vector2(4, 4)
+
+[node name="CameraCursorController" type="Node2D" parent="Camera2D" unique_id=2011739108 node_paths=PackedStringArray("_camera")]
+script = ExtResource("5_bimim")
+_camera = NodePath("..")
+metadata/_custom_type_script = "uid://d3aq2usjalaav"
+
+[node name="CameraTilemapLimiter" type="Node2D" parent="Camera2D" unique_id=617406232 node_paths=PackedStringArray("_tileMapLayer", "_camera")]
+script = ExtResource("7_6t4kj")
+_tileMapLayer = NodePath("../../DrawGrid")
+_camera = NodePath("..")
+metadata/_custom_type_script = "uid://btlbhpegpveu8"
