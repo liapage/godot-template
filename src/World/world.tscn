@@ -1,25 +1,15 @@
-[gd_scene format=3 uid="uid://cbg3kewfdrukk"]
+[gd_scene format=4 uid="uid://cbg3kewfdrukk"]
 
 [ext_resource type="Script" uid="uid://dnielpqqkk8t" path="res://addons/godlib/Cursor/Cursor.cs" id="1_07lyd"]
-[ext_resource type="Texture2D" uid="uid://hq4w38d8ihex" path="res://assets/sprites/tilemap.png" id="1_ikxts"]
 [ext_resource type="Script" uid="uid://ckue0875ghr2v" path="res://src/World/World.cs" id="1_ksbvt"]
+[ext_resource type="Script" uid="uid://c3haxhhd3owa7" path="res://addons/godlib/SceneGrid/SceneGrid.cs" id="2_38fj6"]
+[ext_resource type="Texture2D" uid="uid://c8s1kfbwuh5jd" path="res://assets/sprites/isometric_tileset.png" id="2_v27kh"]
 [ext_resource type="Script" uid="uid://dj40nlgyw3efg" path="res://addons/godlib/GridCursor/GridCursor.cs" id="3_6041h"]
-[ext_resource type="Shader" uid="uid://cjieepkuwue42" path="res://assets/resources/grid.gdshader" id="3_bdyxq"]
-[ext_resource type="Script" uid="uid://bkwyf3y5qoqp5" path="res://src/World/ResidentGrid.cs" id="3_ksbvt"]
 [ext_resource type="Texture2D" uid="uid://bcn2s53khg8l3" path="res://assets/sprites/grid_cursor.png" id="4_3visu"]
-[ext_resource type="Script" uid="uid://btlbhpegpveu8" path="res://addons/godlib/Camera/CameraTilemapLimiter/CameraTilemapLimiter.cs" id="7_6t4kj"]
 [ext_resource type="Script" uid="uid://baur35qtk2xks" path="res://addons/godlib/DrawGrid/DrawGrid.cs" id="7_ksbvt"]
 [ext_resource type="PackedScene" uid="uid://d3adq6v0f6vue" path="res://src/World/hud/hud.tscn" id="8_38fj6"]
+[ext_resource type="PackedScene" uid="uid://c486hkrra1lby" path="res://src/World/Resident/resident.tscn" id="8_v27kh"]
 [ext_resource type="Script" uid="uid://dijp52gtud1y6" path="res://src/World/ResidentManager.cs" id="9_yajkj"]
-
-[sub_resource type="Gradient" id="Gradient_v27kh"]
-offsets = PackedFloat32Array(0)
-colors = PackedColorArray(0.6039216, 0.7529412, 0.60784316, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uby28"]
-gradient = SubResource("Gradient_v27kh")
-width = 1
-height = 1
 
 [sub_resource type="Environment" id="Environment_6041h"]
 background_mode = 3
@@ -27,26 +17,18 @@ glow_enabled = true
 glow_intensity = 1.12
 glow_bloom = 0.3
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_3visu"]
-texture = ExtResource("1_ikxts")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ksbvt"]
+texture = ExtResource("2_v27kh")
+texture_region_size = Vector2i(32, 32)
 0:0/0 = 0
+0:0/0/texture_origin = Vector2i(0, -8)
 
-[sub_resource type="TileSet" id="TileSet_8sv87"]
-sources/0 = SubResource("TileSetAtlasSource_3visu")
-
-[sub_resource type="Gradient" id="Gradient_38fj6"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.7019608, 0.8980392, 0.69803923, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_rusor"]
-gradient = SubResource("Gradient_38fj6")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_pmow1"]
-shader = ExtResource("3_bdyxq")
-shader_parameter/line_width = 4.0
-shader_parameter/cell_size = 16.0
-shader_parameter/line_color = Color(0.58431375, 0.7647059, 0.58431375, 1)
-shader_parameter/grid_offset = Vector2(0, 0)
+[sub_resource type="TileSet" id="TileSet_ksbvt"]
+tile_shape = 1
+tile_layout = 5
+tile_offset_axis = 1
+tile_size = Vector2i(32, 16)
+sources/0 = SubResource("TileSetAtlasSource_ksbvt")
 
 [sub_resource type="Gradient" id="Gradient_6t4kj"]
 offsets = PackedFloat32Array(1)
@@ -57,73 +39,75 @@ gradient = SubResource("Gradient_6t4kj")
 width = 12
 height = 12
 
-[node name="World" type="Node2D" unique_id=583695542 node_paths=PackedStringArray("ResidentManager", "ResidentGrid")]
+[node name="World" type="Node2D" unique_id=583695542 node_paths=PackedStringArray("ResidentManager", "SceneGrid", "DrawGrid")]
 script = ExtResource("1_ksbvt")
 ResidentManager = NodePath("WorldView/ResidentManager")
-ResidentGrid = NodePath("WorldView/ResidentGrid")
+SceneGrid = NodePath("WorldView/SceneGrid")
+DrawGrid = NodePath("WorldView/DrawGrid")
+
+[node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=1114976577]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="BackgroundLayer" unique_id=1046755942]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08627451, 0.09803922, 0.105882354, 1)
 
 [node name="WorldView" type="Node2D" parent="." unique_id=1225861008]
-
-[node name="Background" type="Sprite2D" parent="WorldView" unique_id=1883294260]
-z_index = -10
-scale = Vector2(480, 270)
-texture = SubResource("GradientTexture2D_uby28")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="WorldView" unique_id=1046529043]
 environment = SubResource("Environment_6041h")
 
-[node name="ResidentGrid" type="TileMapLayer" parent="WorldView" unique_id=3000926 node_paths=PackedStringArray("SelectedTileSprite")]
-tile_set = SubResource("TileSet_8sv87")
-script = ExtResource("3_ksbvt")
-FixedSize = Vector2i(4, 4)
-SelectedTileSprite = NodePath("SelectedTile")
-metadata/_custom_type_script = "uid://baur35qtk2xks"
-
-[node name="GridOutline" type="Sprite2D" parent="WorldView/ResidentGrid" unique_id=1802714306]
-z_index = -1
-texture = SubResource("GradientTexture2D_rusor")
-centered = false
-
-[node name="GridOutline2" type="Sprite2D" parent="WorldView/ResidentGrid" unique_id=908412345]
-z_index = -1
-material = SubResource("ShaderMaterial_pmow1")
-texture = SubResource("GradientTexture2D_rusor")
-centered = false
-
-[node name="SelectedTile" type="Sprite2D" parent="WorldView/ResidentGrid" unique_id=1503730091]
-texture = ExtResource("4_3visu")
-
-[node name="GridCursor" type="Node2D" parent="WorldView/ResidentGrid" unique_id=288211667 node_paths=PackedStringArray("_drawGrid")]
-script = ExtResource("3_6041h")
-_drawGrid = NodePath("..")
-metadata/_custom_type_script = "uid://dj40nlgyw3efg"
-
-[node name="Sprite2D2" type="Sprite2D" parent="WorldView/ResidentGrid/GridCursor" unique_id=956230289]
-texture = ExtResource("4_3visu")
-
-[node name="DrawGrid" type="TileMapLayer" parent="WorldView/ResidentGrid" unique_id=362371076]
-script = ExtResource("7_ksbvt")
-metadata/_custom_type_script = "uid://baur35qtk2xks"
-
 [node name="Camera2D" type="Camera2D" parent="WorldView" unique_id=1246196891]
+position = Vector2(-16, -16)
 zoom = Vector2(8, 8)
 
-[node name="CameraTilemapLimiter" type="Node2D" parent="WorldView/Camera2D" unique_id=617406232 node_paths=PackedStringArray("_tileMapLayer", "_camera")]
-script = ExtResource("7_6t4kj")
-_tileMapLayer = NodePath("../../ResidentGrid")
-_camera = NodePath("..")
-metadata/_custom_type_script = "uid://btlbhpegpveu8"
+[node name="DrawGrid" type="TileMapLayer" parent="WorldView" unique_id=3000926 node_paths=PackedStringArray("SelectedTileSprite")]
+y_sort_enabled = true
+position = Vector2(-16, -16)
+tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAAAAAAAAAAAAAABAAEAAAAAAAAAAAAAAAIAAAAAAAAAAAABAAIAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAACAAIAAAAAAAAAAAA=")
+tile_set = SubResource("TileSet_ksbvt")
+script = ExtResource("7_ksbvt")
+FixedSize = Vector2i(3, 3)
+SelectedTileSprite = NodePath("../SelectedTileContainer/SelectedTile")
+metadata/_custom_type_script = "uid://baur35qtk2xks"
+
+[node name="SelectedTileContainer" type="Node2D" parent="WorldView" unique_id=675487574]
+position = Vector2(-16, -16)
+
+[node name="SelectedTile" type="Sprite2D" parent="WorldView/SelectedTileContainer" unique_id=1503730091]
+texture = ExtResource("4_3visu")
+offset = Vector2(0, 8)
+
+[node name="GridCursor" type="Node2D" parent="WorldView" unique_id=288211667 node_paths=PackedStringArray("_drawGrid")]
+script = ExtResource("3_6041h")
+_drawGrid = NodePath("../DrawGrid")
+metadata/_custom_type_script = "uid://dj40nlgyw3efg"
+
+[node name="Sprite2D2" type="Sprite2D" parent="WorldView/GridCursor" unique_id=956230289]
+texture = ExtResource("4_3visu")
+offset = Vector2(-16, -8)
+
+[node name="SceneGrid" type="Node2D" parent="WorldView" unique_id=1870976926]
+position = Vector2(0, -16)
+script = ExtResource("2_38fj6")
+TileSize = 32
+metadata/_custom_type_script = "uid://c3haxhhd3owa7"
 
 [node name="ResidentManager" type="Node2D" parent="WorldView" unique_id=733465592]
 script = ExtResource("9_yajkj")
+ResidentScene = ExtResource("8_v27kh")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1872699074]
+[node name="HUDLayer" type="CanvasLayer" parent="." unique_id=1872699074]
 
-[node name="Hud" parent="CanvasLayer" unique_id=2056031563 instance=ExtResource("8_38fj6")]
+[node name="Hud" parent="HUDLayer" unique_id=2056031563 instance=ExtResource("8_38fj6")]
 
-[node name="Cursor" type="Node2D" parent="CanvasLayer" unique_id=942748008]
+[node name="Cursor" type="Node2D" parent="HUDLayer" unique_id=942748008]
 script = ExtResource("1_07lyd")
 metadata/_custom_type_script = "uid://dnielpqqkk8t"
 
-[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer/Cursor" unique_id=1928596206]
+[node name="Sprite2D" type="Sprite2D" parent="HUDLayer/Cursor" unique_id=1928596206]
 texture = SubResource("GradientTexture2D_8sv87")

@@ -8,9 +8,9 @@ public partial class ResidentRequest : PanelContainer
     [Export] private Label _nameLabel = null!;
     [Export] private Button _acceptButton = null!;
 
-    private Resident _resident;
+    private State.Resident _resident;
 
-    public void Initialize(Resident resident)
+    public void Initialize(State.Resident resident)
     {
         _resident = resident;
     }

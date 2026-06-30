@@ -9,7 +9,7 @@ public partial class SidepaneContainer : Control
 
     public override void _Ready()
     {
-        Game.Instance.World.ResidentGrid.OnTileSelect += e =>
+        Game.Instance.World.DrawGrid.OnTileSelect += e =>
         {
             foreach (var child in GetChildren())
             {

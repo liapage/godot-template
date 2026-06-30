@@ -1,0 +1,10 @@
+[gd_scene format=3 uid="uid://c486hkrra1lby"]
+
+[ext_resource type="Script" uid="uid://b2gmwdkedpqkl" path="res://src/World/Resident/Resident.cs" id="1_7ge2h"]
+[ext_resource type="Texture2D" uid="uid://dc1smbwrqf36a" path="res://assets/sprites/resident1.png" id="1_tnd61"]
+
+[node name="Resident" type="Node2D" unique_id=134068893]
+script = ExtResource("1_7ge2h")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=703180870]
+texture = ExtResource("1_tnd61")

@@ -2,10 +2,13 @@ using Godot;
 
 namespace Game.World;
 
+using addons.godlib.SceneGrid;
+
 public partial class World : Node2D
 {
     [Export] public ResidentManager ResidentManager = null!;
-    [Export] public ResidentGrid ResidentGrid = null!;
+    [Export] public SceneGrid SceneGrid = null!;
+    [Export] public DrawGrid DrawGrid = null!;
 
     public override void _EnterTree()
     {
