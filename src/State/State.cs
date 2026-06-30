@@ -2,9 +2,6 @@ namespace Game.State;
 
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json.Serialization;
-using Chickensoft.Collections;
 using Config;
 using Godot;
 
@@ -19,5 +16,15 @@ public class State
     }
 
     public DateTime RunStartTime =  DateTime.UtcNow;
+
+    public readonly Dictionary<string, Resident> Residents = [];
+    public readonly List<Resident> ResidentRequests =
+    [
+        new() { Name = "Jane Doe" }
+    ];
 }
 
+public record struct Resident
+{
+    public string Name;
+}

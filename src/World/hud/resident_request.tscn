@@ -1,0 +1,58 @@
+[gd_scene format=3 uid="uid://460p1mia7bc5"]
+
+[ext_resource type="Script" uid="uid://br8uvwf46lacj" path="res://src/World/hud/ResidentRequest.cs" id="1_yj070"]
+[ext_resource type="FontFile" uid="uid://bvwnlo8atbjw6" path="res://assets/fonts/FiraCode/FiraCode-Bold.ttf" id="2_4tbkv"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kr5o"]
+bg_color = Color(0, 0, 0, 0.20784314)
+
+[sub_resource type="LabelSettings" id="LabelSettings_8sv87"]
+font = ExtResource("2_4tbkv")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_rusor"]
+font = ExtResource("2_4tbkv")
+font_size = 24
+
+[sub_resource type="LabelSettings" id="LabelSettings_4tbkv"]
+font_size = 24
+font_color = Color(0.74814767, 0.62793964, 0, 1)
+
+[node name="ResidentRequest" type="PanelContainer" unique_id=886255892 node_paths=PackedStringArray("_nameLabel", "_acceptButton")]
+theme_override_styles/panel = SubResource("StyleBoxFlat_1kr5o")
+script = ExtResource("1_yj070")
+_nameLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Name")
+_acceptButton = NodePath("MarginContainer/VBoxContainer/AcceptButton")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=290420107]
+layout_mode = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 26
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 26
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=688279142]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1762768382]
+layout_mode = 2
+text = "RESIDENT REQUEST
+"
+label_settings = SubResource("LabelSettings_8sv87")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1042010560]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1402536083]
+layout_mode = 2
+text = "Name:"
+label_settings = SubResource("LabelSettings_rusor")
+
+[node name="Name" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=977576140]
+layout_mode = 2
+text = "First Last"
+label_settings = SubResource("LabelSettings_4tbkv")
+
+[node name="AcceptButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=671144717]
+layout_mode = 2
+text = "ACCEPT"

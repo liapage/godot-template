@@ -48,7 +48,6 @@ metadata/_custom_type_script = "uid://bxq804agjnmna"
 layer = 20
 
 [node name="CRT" type="ColorRect" parent="CanvasLayer" unique_id=1537162285]
-visible = false
 material = ExtResource("4_7omc5")
 anchors_preset = 15
 anchor_right = 1.0
@@ -59,6 +58,7 @@ mouse_filter = 2
 color = Color(0, 0, 0, 0)
 
 [node name="Vignette" type="ColorRect" parent="CanvasLayer" unique_id=1324086542]
+visible = false
 material = SubResource("ShaderMaterial_4bcji")
 anchors_preset = 15
 anchor_right = 1.0
@@ -67,6 +67,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Grain" type="ColorRect" parent="CanvasLayer" unique_id=561215568]
+visible = false
 material = SubResource("ShaderMaterial_cdx1q")
 anchors_preset = 15
 anchor_right = 1.0

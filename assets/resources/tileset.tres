@@ -1,7 +1,5 @@
 [gd_resource type="TileSet" format=3 uid="uid://cyh5xayd8oyhn"]
 
-[ext_resource type="Texture2D" uid="uid://dqicimbq6qae7" path="res://assets/sprites/tileset.png" id="1_5mwl8"]
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5mwl8"]
 polygon = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
@@ -21,7 +19,6 @@ outlines = Array[PackedVector2Array]([PackedVector2Array(-8, -8, 8, -8, 8, 8, -8
 agent_radius = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_6041h"]
-texture = ExtResource("1_5mwl8")
 0:0/0 = 0
 0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_5mwl8")
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)

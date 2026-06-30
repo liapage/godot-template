@@ -30,4 +30,36 @@ public static class GodotExtensions
             }
         }
     }
+
+    public static Vector2I Vector2IFromString(string str)
+    {
+        if (str.Length < 5)
+        {
+            GD.PrintErr("Expected string value of valid length to parse Vector2I");
+            return Vector2I.Zero;
+        }
+
+        if (str[0] != '(' && str[^1] != ')')
+        {
+            GD.PrintErr("Expected string value of valid structure to parse Vector2I");
+            return Vector2I.Zero;
+        }
+
+        str =  str.Substring(1, str.Length - 2);
+
+        var numStrs = str.Split(',');
+        if (numStrs.Length != 2)
+        {
+            GD.PrintErr("Expected 2 numbers to parse Vector2I");
+            return Vector2I.Zero;
+        }
+
+        if (!int.TryParse(numStrs[0].Trim(), out int x) || !int.TryParse(numStrs[1].Trim(), out int y))
+        {
+            GD.PrintErr("Expected 2 valid numbers to parse Vector2I");
+            return Vector2I.Zero;
+        }
+
+        return new Vector2I(x, y);
+    }
 }

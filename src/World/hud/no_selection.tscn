@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bvodh86kr8kew"]
+
+[ext_resource type="Script" uid="uid://db6aekt53k1o8" path="res://src/World/hud/NoSelection.cs" id="1_on6xd"]
+
+[node name="NoSelection" type="VBoxContainer" unique_id=1365387104]
+theme_override_constants/separation = 64
+script = ExtResource("1_on6xd")

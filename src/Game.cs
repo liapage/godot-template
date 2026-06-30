@@ -15,6 +15,7 @@ public partial class Game : Control
     public readonly ILog Log = new Log(nameof(Game), new ConsoleWriter(), new TraceWriter());
     public readonly Config.Config Config = new();
     public State.State State = null!;
+    public World.World World = null!;
 
     // Dependencies
     [Export] private PackedScene _initialScene = null!;
