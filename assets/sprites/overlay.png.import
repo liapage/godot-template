@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dlr3p74io1cah"
-path="res://.godot/imported/Panel.png-d86c275972f89fa101fce2e397ead85b.ctex"
+uid="uid://c71wi1u33eci0"
+path="res://.godot/imported/overlay.png-c275ec30d7280ddc48924895eb8ba77f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/sprites/Panel.png"
-dest_files=["res://.godot/imported/Panel.png-d86c275972f89fa101fce2e397ead85b.ctex"]
+source_file="res://assets/sprites/overlay.png"
+dest_files=["res://.godot/imported/overlay.png-c275ec30d7280ddc48924895eb8ba77f.ctex"]
 
 [params]
 

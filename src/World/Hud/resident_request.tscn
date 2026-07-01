@@ -1,17 +1,16 @@
 [gd_scene format=3 uid="uid://460p1mia7bc5"]
 
-[ext_resource type="Script" uid="uid://br8uvwf46lacj" path="res://src/World/hud/ResidentRequest.cs" id="1_yj070"]
-[ext_resource type="FontFile" uid="uid://bvwnlo8atbjw6" path="res://assets/fonts/FiraCode/FiraCode-Bold.ttf" id="2_4tbkv"]
+[ext_resource type="Script" uid="uid://br8uvwf46lacj" path="res://src/World/hud/ResidentRequest.cs" id="1_ypsrh"]
+[ext_resource type="FontFile" uid="uid://bvwnlo8atbjw6" path="res://assets/fonts/FiraCode/FiraCode-Bold.ttf" id="2_8jxsa"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1kr5o"]
-bg_color = Color(0, 0, 0, 0.20784314)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_4tbkv"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8sv87"]
-font = ExtResource("2_4tbkv")
+font = ExtResource("2_8jxsa")
 font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_rusor"]
-font = ExtResource("2_4tbkv")
+font = ExtResource("2_8jxsa")
 font_size = 24
 
 [sub_resource type="LabelSettings" id="LabelSettings_4tbkv"]
@@ -19,8 +18,8 @@ font_size = 24
 font_color = Color(0.74814767, 0.62793964, 0, 1)
 
 [node name="ResidentRequest" type="PanelContainer" unique_id=886255892 node_paths=PackedStringArray("_nameLabel", "_acceptButton")]
-theme_override_styles/panel = SubResource("StyleBoxFlat_1kr5o")
-script = ExtResource("1_yj070")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_4tbkv")
+script = ExtResource("1_ypsrh")
 _nameLabel = NodePath("MarginContainer/VBoxContainer/HBoxContainer/Name")
 _acceptButton = NodePath("MarginContainer/VBoxContainer/AcceptButton")
 

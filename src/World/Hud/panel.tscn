@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://yho3ulej8yjn"]
+
+[ext_resource type="Texture2D" uid="uid://cu3nbvxvt5yem" path="res://assets/sprites/panel.png" id="1_j6eq1"]
+[ext_resource type="Script" uid="uid://48byo0jljp20" path="res://src/World/Hud/Panel.cs" id="2_4fo8s"]
+[ext_resource type="FontFile" uid="uid://bvwnlo8atbjw6" path="res://assets/fonts/FiraCode/FiraCode-Bold.ttf" id="2_4x444"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_8sv87"]
+texture = ExtResource("1_j6eq1")
+texture_margin_left = 10.0
+texture_margin_top = 60.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
+axis_stretch_horizontal = 2
+axis_stretch_vertical = 1
+
+[sub_resource type="LabelSettings" id="LabelSettings_tfjfs"]
+font = ExtResource("2_4x444")
+font_size = 28
+font_color = Color(0.10980392, 0.105882354, 0.13333334, 1)
+
+[node name="Panel" type="PanelContainer" unique_id=515818611 node_paths=PackedStringArray("_vboxContainer", "_titleLabel")]
+custom_minimum_size = Vector2(500, 0)
+theme_override_styles/panel = SubResource("StyleBoxTexture_8sv87")
+script = ExtResource("2_4fo8s")
+_vboxContainer = NodePath("Margin/VBox")
+_titleLabel = NodePath("Margin/VBox/Title")
+
+[node name="Margin" type="MarginContainer" parent="." unique_id=1122034718]
+layout_mode = 2
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = -46
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
+
+[node name="VBox" type="VBoxContainer" parent="Margin" unique_id=177143616]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="Title" type="Label" parent="Margin/VBox" unique_id=521511858]
+layout_mode = 2
+size_flags_vertical = 0
+text = "TITLE"
+label_settings = SubResource("LabelSettings_tfjfs")
+horizontal_alignment = 1

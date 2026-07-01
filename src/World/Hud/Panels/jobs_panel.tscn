@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://c6am0l6ov3mlv"]
+
+[ext_resource type="Script" uid="uid://ct2i5mw1gadyn" path="res://src/World/hud/Panels/JobsPanel.cs" id="1_ui62i"]
+[ext_resource type="PackedScene" uid="uid://bvodh86kr8kew" path="res://src/World/hud/no_selection.tscn" id="2_odf7j"]
+[ext_resource type="PackedScene" uid="uid://bleiaxvvgv7ni" path="res://src/World/hud/tile_selected_sidepane.tscn" id="3_uv3tk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_8sv87"]
+
+[node name="JobsPanel" type="PanelContainer" unique_id=2063956427]
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_8sv87")
+script = ExtResource("1_ui62i")
+_noSelectionScene = ExtResource("2_odf7j")
+_selectedScene = ExtResource("3_uv3tk")

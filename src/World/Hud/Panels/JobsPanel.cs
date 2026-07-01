@@ -1,8 +1,8 @@
+namespace Game.World.hud.Panels;
+
 using Godot;
 
-namespace Game.World.hud;
-
-public partial class SidepaneContainer : Control
+public partial class JobsPanel : PanelContainer
 {
     [Export] private PackedScene _noSelectionScene = null!;
     [Export] private PackedScene _selectedScene = null!;

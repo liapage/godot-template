@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bleiaxvvgv7ni"]
+
+[ext_resource type="Script" uid="uid://cr2re45chtyck" path="res://src/World/hud/TileSelectedSidepane.cs" id="1_d14sa"]
+[ext_resource type="Script" uid="uid://b0muir8oyw2ld" path="res://src/World/hud/ResidentRequests.cs" id="2_hn1oq"]
+[ext_resource type="PackedScene" uid="uid://460p1mia7bc5" path="res://src/World/hud/resident_request.tscn" id="3_qbktu"]
+
+[node name="TileSelectedSidepane" type="VBoxContainer" unique_id=1150290890 node_paths=PackedStringArray("_nameLabel")]
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 48.0
+grow_horizontal = 2
+size_flags_vertical = 3
+script = ExtResource("1_d14sa")
+_nameLabel = NodePath("NameLabel")
+
+[node name="NameLabel" type="Label" parent="." unique_id=368192423]
+layout_mode = 2
+
+[node name="ResidentRequests" type="VBoxContainer" parent="." unique_id=974387750]
+layout_mode = 2
+script = ExtResource("2_hn1oq")
+_residentRequestScene = ExtResource("3_qbktu")

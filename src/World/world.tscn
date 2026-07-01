@@ -94,6 +94,7 @@ offset = Vector2(-16, -8)
 [node name="SceneGrid" type="Node2D" parent="WorldView" unique_id=1870976926]
 position = Vector2(0, -16)
 script = ExtResource("2_38fj6")
+Isometric = true
 TileSize = 32
 metadata/_custom_type_script = "uid://c3haxhhd3owa7"
 

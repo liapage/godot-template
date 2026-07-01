@@ -27,6 +27,9 @@
   Residents also have different limits for their stats so you should invest different stats to different residents
   Certain stat achievements unlock abilities like creating a school, gym, building guns, etc.
 
+### Modes
+- Turned: Manage zombies instead of residents and send them to expeditions to loot and turn humans, bringing more zombies to your grid
+
 ## Steamworks
 
 To make it work for MacOS Apple Silicon, I had to clone https://github.com/rlabrecque/Steamworks.NET and build it myself:
