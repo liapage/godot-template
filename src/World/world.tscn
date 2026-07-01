@@ -7,7 +7,7 @@
 [ext_resource type="Script" uid="uid://dj40nlgyw3efg" path="res://addons/godlib/GridCursor/GridCursor.cs" id="3_6041h"]
 [ext_resource type="Texture2D" uid="uid://bcn2s53khg8l3" path="res://assets/sprites/grid_cursor.png" id="4_3visu"]
 [ext_resource type="Script" uid="uid://baur35qtk2xks" path="res://addons/godlib/DrawGrid/DrawGrid.cs" id="7_ksbvt"]
-[ext_resource type="PackedScene" uid="uid://d3adq6v0f6vue" path="res://src/World/hud/hud.tscn" id="8_38fj6"]
+[ext_resource type="PackedScene" uid="uid://d3adq6v0f6vue" path="res://src/World/Hud/hud.tscn" id="8_38fj6"]
 [ext_resource type="PackedScene" uid="uid://c486hkrra1lby" path="res://src/World/Resident/resident.tscn" id="8_v27kh"]
 [ext_resource type="Script" uid="uid://dijp52gtud1y6" path="res://src/World/ResidentManager.cs" id="9_yajkj"]
 
@@ -39,11 +39,12 @@ gradient = SubResource("Gradient_6t4kj")
 width = 12
 height = 12
 
-[node name="World" type="Node2D" unique_id=583695542 node_paths=PackedStringArray("ResidentManager", "SceneGrid", "DrawGrid")]
+[node name="World" type="Node2D" unique_id=583695542 node_paths=PackedStringArray("ResidentManager", "SceneGrid", "DrawGrid", "ModalContainer")]
 script = ExtResource("1_ksbvt")
 ResidentManager = NodePath("WorldView/ResidentManager")
 SceneGrid = NodePath("WorldView/SceneGrid")
 DrawGrid = NodePath("WorldView/DrawGrid")
+ModalContainer = NodePath("HUDLayer/ModalContainer")
 
 [node name="BackgroundLayer" type="CanvasLayer" parent="." unique_id=1114976577]
 layer = -1
@@ -105,6 +106,14 @@ ResidentScene = ExtResource("8_v27kh")
 [node name="HUDLayer" type="CanvasLayer" parent="." unique_id=1872699074]
 
 [node name="Hud" parent="HUDLayer" unique_id=2056031563 instance=ExtResource("8_38fj6")]
+
+[node name="ModalContainer" type="Control" parent="HUDLayer" unique_id=893653453]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Cursor" type="Node2D" parent="HUDLayer" unique_id=942748008]
 script = ExtResource("1_07lyd")

@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://60cmvemjwfv5"]
+
+[ext_resource type="Script" uid="uid://dq6olv2d6wfrk" path="res://src/World/Hud/IconButtons/Jobs/BackgroundButton.cs" id="1_3eu8f"]
+
+[node name="JobsModal" type="Control" unique_id=969531188]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackgroundButton" type="TextureButton" parent="." unique_id=333484278]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_3eu8f")
+
+[node name="MarginContainer" type="MarginContainer" parent="BackgroundButton" unique_id=1544995958]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_top = 200
+theme_override_constants/margin_right = 200
+theme_override_constants/margin_bottom = 200
+
+[node name="PanelContainer" type="PanelContainer" parent="BackgroundButton/MarginContainer" unique_id=819653255]
+layout_mode = 2
